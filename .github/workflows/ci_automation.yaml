@@ -7,16 +7,37 @@ on:
 #push and pull are event based triggers
   push:
     branches:
-    -main
-    -master
+      - main
+      - master
   pull_request:
     branches:
-    -main 
+      - main 
   #time based trigger (whenever any person push code)
   schedule:
-    -cron: '0 0 * * *'
+    - cron: '0 0 * * *'
 
 #what to do
 jobs:
+  #name it anything like run+pandas job
   run-my-job: 
+    #which machine to test entire workflow or run my workflow anything like windows-latest
+    runs-on: ubuntu-latest
+#we can write n number of actions
+    steps:
+    - name: Checkout code
+            #owner/repository@version
+      uses: actions/checkout@v2
 
+    #setup python on ubuntu machine,actions/setup-python command search in github with version 4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    #next step is to install pandas after installing pandas
+    - name: Install dependies
+      run: pip install pandas
+
+      #terminal commands we use run , remaining uses uses see for it in google
+    - name: Run Pandas job
+      run: python app.py
