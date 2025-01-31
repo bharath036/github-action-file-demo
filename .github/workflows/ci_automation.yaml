@@ -1,0 +1,22 @@
+#Name of workflow/job/action
+name: Run Pandas Job
+
+#When to do
+#Trigger for workflow
+on:
+#push and pull are event based triggers
+  push:
+    branches:
+    -main
+    -master
+  pull_request:
+    branches:
+    -main 
+  #time based trigger (whenever any person push code)
+  schedule:
+    -cron: '0 0 * * *'
+
+#what to do
+jobs:
+  run-my-job: 
+
